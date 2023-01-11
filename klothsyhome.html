@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <title>KLOTHSY || Home</title>
+  <style>
+    .cards{
+      margin-left: 3%;
+      padding-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .card{
+      margin-bottom:50px;
+      height:360px;
+      width: 20rem;
+      
+    }
+    .card img{
+      height: 200px;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand">KLOTHSY</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="klothsyhome.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="klothsycontact.html">Contact Us</a>
+          </li>
+          
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <!-- End of Navbar -->
+  <section>
+    <div class="container-fluid">
+    <div class="cards"></div></div>
+
+  </section>
+</body>
+<script type="text/javascript">
+  var apiUrl = 'https://fakestoreapi.com/products';
+  fetch(apiUrl).then(response => {
+    return response.json();
+  }).then(data => {
+    // Work with JSON data here
+    let dynamic = document.querySelector('.cards');
+    data.forEach(user =>{
+      let a = document.querySelector('.cards').innerHTML;
+      dynamic.innerHTML = `
+      <div class = "col-xxl-3 col-xl-4 col-md-6 col-sm-12">
+        <div class="card">
+          <img src='${user.image}' class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title" id ="a">${user.title}</h5>
+            <p class="card-text"></p>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="abc()">
+              Click Me
+            </button>
+          </div>
+        </div>
+      </div>
+      ` + a;
+    });
+    console.log(data);
+  }).catch(err => {
+    // Do something for an error here
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</html>

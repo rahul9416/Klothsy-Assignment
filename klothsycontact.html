@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width ,initial-scale = 1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <style>
+
+    .form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .form .container-fluid{
+        border: 2px solid black;
+        border-radius: 5px;
+        margin-top: 2%;
+        width: 40%;
+        padding:10px;
+    }
+
+    .head{
+        border-bottom: 2px solid #5f5f5f;
+    }
+
+    .error{
+        color: red;
+        margin-left: 5px;
+        font-size: 12px;
+        display: none;
+    }
+
+    @media only screen and (max-width:950px){
+        .form .container-fluid{
+            width:90%;
+            margin-top:20%
+        }
+    }
+
+  </style>
+  
+  <title>KLOTHSY || Contact Us</title>
+</head>
+<body>
+
+    <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand">KLOTHSY</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="klothsyhome.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="klothsycontact.html">Contact Us</a>
+          </li>
+          
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <!-- End of Navbar -->
+  <section class="form">
+    <div class="container-fluid">
+        <div class="head">
+            <h2>ENQUIRE NOW!!!</h2>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label" style="margin-top:20px">Name</label>
+            <input type="name" class="form-control" id="name" placeholder="Enter Your Full Name" onkeypress="nme()">
+            <p class="error" id="name-error">Name Cannot Be Empty!!</p>
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Phone No. </label>
+            <input type="phone" class="form-control" id="phone" placeholder="Enter Your Contact No.">
+            <p class="error" id="phone-error">Phone no. Cannot Be Empty!!</p>
+          </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="name@example.com">
+            <p class="error" id="email-error">Email Cannot Be Empty!!</p>
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Message</label>
+            <textarea class="form-control" id="msgs" rows="3"></textarea>
+            <p class="error" id="msg-error">Please enter our Query!!!</p>
+          </div>
+          <div class="mb-3" style="text-align: center;">
+            <button class="btn btn-primary" onclick="submit()">Submit</button>
+          </div>
+    </div>
+  </section>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<script>
+    const form = document.querySelector("#form");
+    const name1 = document.querySelector("#name");
+    const email = document.querySelector("#email");
+    const phone = document.querySelector("#phone");
+    const msgs = document.querySelector("#msgs");
+
+    const success = (input) => {
+        document.getElementById(input.id).style.borderColor='green';
+    }
+
+    const error = (input) => {
+        document.getElementById(input.id).style.borderColor='red';
+    }
+
+    const checkEmail = (input) => {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (re.test(input.value)) {
+            success(input);
+            return true;
+        } else {
+            error(input);
+        }
+    };
+
+
+    const checkLength = (input, min, max) => {
+        if (input.value.length < min || input.value.length > max) {
+            error(input);
+        }
+        else{
+            success(input);
+            return true;
+        }
+    };
+
+    const checkPhone = (input) => {
+        if(/^[0-9]+$/.test(input.value)){
+            success(input);
+            return true;
+        }
+        else{
+            error(input);
+        }
+    }
+
+    const checkRequired = (inputArr) => {
+        var b=0;
+        inputArr.forEach((input) => {
+            if(input.value == ""){
+                a=input.id;
+                error(input);
+            }
+            else{
+                a=input.id;
+                success(input);
+                b=b+1;
+            }
+        });
+        if(b==4){
+            return true;
+        }
+    }
+
+    function submit() {
+        var a=checkRequired([name1, email, phone, msgs]);
+        var b=checkPhone(phone);
+        var c=checkLength(phone,10,10);
+        var d=checkLength(msgs,5,200);
+        var e= checkEmail(email);
+        if(a==true && b==true && c==true && d==true && e==true){
+            alert("We got your enquiry. We'll get back to your shortly.");
+            window.location.href='klothsyhome.html';
+        }
+    };
+
+</script>
+</html>
